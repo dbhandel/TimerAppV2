@@ -15,7 +15,7 @@ const Navigation = React.createClass({
         </div>
         <div className='top-bar-right'>
           <ul className="menu">
-            <li className='menu-text'>Created by <a href="https://github.com/dbhandel" target='_blank'>David Handel</a></li>
+            <li className='menu-text'>Created by<a href="https://github.com/dbhandel" target='_blank'>David Handel</a></li>
           </ul>
         </div>
       </div>
