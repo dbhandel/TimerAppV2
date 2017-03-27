@@ -6,23 +6,47 @@ const Countdown = React.createClass({
 
   getInitialState() {
     return {
-      seconds: 0
+      seconds: 0,
+      countdownStatus: 'stopped'
     };
   },
 
   setCountdown(seconds) {
     if(seconds && typeof seconds === 'number') {
       this.setState({
-        seconds
+        seconds,
+        countdownStatus: 'started'
       });
     }
   },
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(this.prevState.seconds !== this.state.seconds) {
-  //     console.log('component did update');
-  //   }
-  // },
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.countdownStatus !== this.state.countdownStatus) {
+      switch(this.state.countdownStatus) {
+        case 'started':
+          this.startTimer();
+          break;
+        case 'paused':
+          clearInterval(this.timer);
+          break;
+        case 'stopped':
+          clearInterval(this.timer);
+          this.setState({
+            seconds: 0
+          });
+          break;
+        default:
+      }
+    }
+  },
+
+  startTimer() {
+    this.timer = setInterval(() => {
+      this.setState({
+        seconds: this.state.seconds > 0 ? this.state.seconds - 1 : this.state.seconds
+      });
+    }, 1000);
+  },
 
   render() {
     let seconds = this.state.seconds;

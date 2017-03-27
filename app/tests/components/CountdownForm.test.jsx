@@ -29,7 +29,7 @@ describe('CountdownForm', () => {
       let countdownForm = TestUtils.renderIntoDocument(<CountdownForm updateStateSeconds={spy}/>);
       countdownForm.refs.seconds.value = 'a61';
       let $el = $(React.findDOMNode(countdownForm));
-      TestUtils.Simulate.submit($el.find('form')[0])
+      TestUtils.Simulate.submit($el.find('form')[0]);
 
       expect(spy).toNotHaveBeenCalled();
    });
