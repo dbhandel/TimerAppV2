@@ -31,5 +31,29 @@ describe('Countdown', function() {
         done();
       }, 2001);
     });
+
+    it('should pause the countdown when the pause button is clicked', (done) => {
+      let countdown = TestUtils.renderIntoDocument(<Countdown/>);
+      countdown.setCountdown(3);
+      //countdown.setState({countdownStatus: 'paused'});
+      countdown.changeStatus('paused');
+      setTimeout(() => {
+        expect(countdown.state.seconds).toBe(3);
+        expect(countdown.state.countdownStatus).toBe('paused');
+        done();
+      }, 2001);
+    });
+
+    it('should stop the countdown and reset the count to zero when the stop button is clicked', (done) => {
+      let countdown = TestUtils.renderIntoDocument(<Countdown/>);
+      countdown.setCountdown(3);
+      countdown.changeStatus('stopped');
+
+      setTimeout(() => {
+        expect(countdown.state.seconds).toBe(0);
+        expect(countdown.state.countdownStatus).toBe('stopped');
+        done();
+      }, 1001);
+    });
   });
 });
