@@ -45,12 +45,24 @@ const Countdown = React.createClass({
     }
   },
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    this.timer = null;
+  },
+
   startTimer() {
+
     this.timer = setInterval(() => {
       this.setState({
         seconds: this.state.seconds > 0 ? this.state.seconds - 1 : this.state.seconds
       });
+      if(this.state.seconds === 0) {
+        this.setState({
+          countdownStatus: 'stopped'
+        })
+      }
     }, 1000);
+
   },
 
   renderControlArea() {
